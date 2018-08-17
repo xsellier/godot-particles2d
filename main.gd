@@ -3,7 +3,7 @@ extends Node2D
 export(Texture) var texture
 
 export(bool) var expire = true
-export(float, 0.1, 60) var duration = 1.0
+export(float, 0.1, 60, 0.1) var duration = 1.0
 export(Vector2) var half_extends = Vector2(0.0, 0.0)
 
 export(int, 0, 360) var direction = 0
@@ -61,7 +61,7 @@ func _process(delta):
       continue
 
     # Compute variables
-    var current_progress = min(1.0, fmod(particle.custom_duration, duration))
+    var current_progress = min(1.0, particle.custom_duration / duration)
     var current_opacity = lerp(initial_opacity, final_opacity, current_progress)
     var current_scale = initial_scale.linear_interpolate(final_scale, current_progress)
     var current_position = particle.custom_matrix.o
